@@ -1,0 +1,36 @@
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #3A4B5D;
+}
+
+.logo{
+    width: 5rem;
+    height: 5rem;
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 50%;
+}
+
+h1{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.menu{
+    display: flex;
+    gap: 1rem;
+}
+
+.menu-list{
+    display: flex;
+    gap: 1rem;
+    list-style: none; 
+}
+
+.menu-list li a{
+    text-decoration: none;
+    color: black;
+}

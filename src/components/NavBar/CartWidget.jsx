@@ -1,9 +1,10 @@
+import "./cartwidget.css"
 function CartWidget() {
     return (
         <>
-            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                🛒
-                <span>0</span>
+            <div className="cart-widget">
+                <p className="cart-icon">🛒</p>
+                <span className="cart-count">0</span>
             </div>
             
         </>

@@ -1,0 +1,31 @@
+.item-card {
+  display: flex;         
+  flex-direction: column; 
+  justify-content: space-between;
+  border: 2px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  border-radius: 8px;
+  max-width: 300px;
+  margin: 20px;
+  height: 300px;
+  color: #ccc
+}
+
+.item-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.ver-detalle {
+  color: #333;
+  text-decoration: none;
+  margin-top: 50px ;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f2f2f2;
+  cursor: pointer;  
+}
