@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ItemCard from "../ItemCard/ItemCard";
 import { useParams } from "react-router-dom";
-import { getProductos, getProductosByCategoria } from "../../Data/data";
+import { getProductos, getProductosByCategoria } from "../../db/data";
 import "./itemlistcontainer.css"
 
 

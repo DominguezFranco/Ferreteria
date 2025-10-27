@@ -1,29 +1,51 @@
-import React, {useState, useEffect} from "react";
-import { useParams } from "react-router";
-import { getProductoById } from "../../Data/data";
-import "./itemdetailcontainer.css"  
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import ItemDetail from '../ItemDetail/ItemDetail';
+import { getProductById } from 'firebase/firestore'; // Importar el servicio
+import { useCart } from '../context/CartContext'; // Importar el Context
 
+const ItemDetailContainer = () => {
+    const [product, setProduct] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const { productId } = useParams();
 
-function ItemDetailContainer() {
-    const {descripcionId} = useParams();
-    const [producto, setProducto] = useState(null);
+    const { addItem, isInCart } = useCart(); // Obtener funciones del carrito
 
     useEffect(() => {
-        getProductoById(descripcionId).then(res => setProducto(res));
-    }, [descripcionId]);
+        setLoading(true);
+        getProductById(productId)
+            .then(data => {
+                setProduct(data);
+            })
+            .catch(error => {
+                console.error("Error al cargar el detalle:", error);
+                setProduct(null);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    }, [productId]);
 
-    if (!producto) {
-        return <h1>Cargando...</h1>;
-    } else {
-        return (
-            <div className="item-detail-container">
-                <img src={producto.imagen} alt={producto.nombre} className="item-image" />
-                <h3>{producto.nombre}</h3>
-                <p>${producto.precio}</p>
-                <p>{producto.descripcion}</p>
-            </div>
-        );
+    const handleOnAdd = (quantity) => {
+        // Función que se pasa al ItemCount y llama a addItem del Context
+        addItem(product, quantity);
+    };
+
+    if (loading) {
+        return <p>Cargando producto...</p>; // Loader
     }
-}
+
+    if (!product) {
+        return <p>Producto no encontrado.</p>; // Mensaje condicional
+    }
+
+    return (
+        <ItemDetail 
+            product={product} 
+            onAdd={handleOnAdd} 
+            isInCart={isInCart(product.id)} // Pasar si ya está en carrito
+        />
+    );
+};
 
 export default ItemDetailContainer;
