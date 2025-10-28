@@ -1,30 +1,55 @@
-import React, { useEffect, useState } from "react";
-import ItemCard from "../ItemCard/ItemCard";
-import { useParams } from "react-router-dom";
-import { getProductos, getProductosByCategoria } from "../../db/data";
-import "./itemlistcontainer.css"
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
+// Importación CORREGIDA de la lógica de Firebase/Firestore
+import { getProducts } from '../../db/firestore';
 
-function ItemListContainer() {
-    const [productos, setProductos] = useState([]);
-    const { categoriaId } = useParams();
+import ItemList from '../ItemList/ItemList';
 
-    useEffect(()=>{
-        if (categoriaId){
-            getProductosByCategoria(categoriaId).then(res => setProductos(res));
-        } else {
-            getProductos().then(res => setProductos(res));
-        }
-    }, [categoriaId]);
+const ItemListContainer = ({ greeting = "Catálogo de Productos" }) => {
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    
+    // Obtener el parámetro de la URL (para la ruta /categoria/:categoryId)
+    const { categoryId } = useParams();
 
+    useEffect(() => {
+        setLoading(true);
+        setProducts([]); // Limpiar la lista al cambiar de categoría
+
+        // Llama a la función de fetching, pasando categoryId (será undefined si no está en la URL)
+        getProducts(categoryId)
+            .then(data => {
+                setProducts(data);
+            })
+            .catch(error => {
+                console.error("Error al cargar los productos:", error);
+                // Aquí podrías manejar un estado de error
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+            
+    }, [categoryId]); // Se ejecuta cada vez que cambia la categoría
 
     return (
-        <div className="container">
-            {productos.map(prod => (
-                <ItemCard key={prod.id} producto={prod} />
-            ))}
+        <div className="item-list-container">
+            <h1>{categoryId ? categoryId.toUpperCase() : greeting}</h1>
+            
+            {/* Renderizado Condicional: Loader (Requisito de Entrega) */}
+            {loading ? (
+                <p className="loading-message">Cargando productos...</p>
+            ) : (
+                // Renderizado Condicional: Lista Vacía
+                products.length === 0 ? (
+                    <p>No hay productos disponibles en esta categoría.</p>
+                ) : (
+                    // Componente de Presentación ItemList
+                    <ItemList products={products} />
+                )
+            )}
         </div>
-    )
-}
+    );
+};
 
 export default ItemListContainer;

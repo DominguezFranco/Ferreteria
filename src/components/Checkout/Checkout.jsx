@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useCart } from '../../context/CartContext';
-import { createOrder } from '../../services/firestore';
+import { createOrder } from '../../db/firestore';
 import CheckoutForm from './CheckoutForm'; // Crear este componente para el formulario
 
 const Checkout = () => {

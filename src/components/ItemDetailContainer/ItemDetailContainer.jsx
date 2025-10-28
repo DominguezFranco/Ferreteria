@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ItemDetail from '../ItemDetail/ItemDetail';
-import { getProductById } from 'firebase/firestore'; // Importar el servicio
-import { useCart } from '../context/CartContext'; // Importar el Context
+import { getProductById } from '../../db/firestore';
+import { useCart } from '../../context/CartContext';
 
 const ItemDetailContainer = () => {
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
-    const { productId } = useParams();
+    const { productId } = useParams(); 
 
-    const { addItem, isInCart } = useCart(); // Obtener funciones del carrito
+    const { addItem, isInCart } = useCart();
 
     useEffect(() => {
         setLoading(true);
+        setProduct(null);
+        
         getProductById(productId)
             .then(data => {
                 setProduct(data);
@@ -24,26 +26,37 @@ const ItemDetailContainer = () => {
             .finally(() => {
                 setLoading(false);
             });
+            
     }, [productId]);
 
+    // Función que se pasa al ItemCount. Aquí ocurre el mapeo crítico.
     const handleOnAdd = (quantity) => {
-        // Función que se pasa al ItemCount y llama a addItem del Context
-        addItem(product, quantity);
+        
+        // 🛑 Mapeamos los campos de Firestore a los nombres esperados por el CartContext.
+        const itemToAdd = {
+            id: product.id,
+            name: product.nombre,   // Mapeo de nombre
+            price: product.precio, // Mapeo de precio
+            stock: product.stock,
+            imagen: product.imagen
+        };
+
+        addItem(itemToAdd, quantity);
     };
 
     if (loading) {
-        return <p>Cargando producto...</p>; // Loader
+        return <p className="loading-message">Cargando producto...</p>;
     }
 
     if (!product) {
-        return <p>Producto no encontrado.</p>; // Mensaje condicional
+        return <p>Producto no encontrado o no existe.</p>;
     }
 
     return (
         <ItemDetail 
             product={product} 
             onAdd={handleOnAdd} 
-            isInCart={isInCart(product.id)} // Pasar si ya está en carrito
+            isInCart={isInCart(product.id)}
         />
     );
 };

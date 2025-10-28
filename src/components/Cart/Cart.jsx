@@ -1,17 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useCart } from '../../context/CartContext';
-import CartItem from '../CartItem/CartItem'; // Necesitas crear este subcomponente
+import { useCart } from '../../context/CartContext'; 
+import CartItem from './CartItem'; // Importa el componente de item
 
 const Cart = () => {
-    const { cart, totalPrice, clearCart } = useCart();
+    const { cart, clearCart, totalPrice, totalQuantity } = useCart();
 
-    // Renderizado Condicional: Carrito Vacío
     if (cart.length === 0) {
         return (
-            <div className="cart-empty-container">
-                <h2>Tu Carrito está Vacío 🛒</h2>
-                <p>Parece que aún no has agregado productos.</p>
+            <div className="cart-empty-message">
+                <h2>🛒 Carrito Vacío</h2>
+                <p>No tienes productos en tu carrito. ¡Vamos de compras!</p>
                 <Link to="/" className="btn-go-to-shop">
                     Ver Catálogo
                 </Link>
@@ -19,31 +18,32 @@ const Cart = () => {
         );
     }
 
-    // Carrito con Productos
     return (
         <div className="cart-container">
-            <h1>Tu Carrito de Compras</h1>
-
+            <h1>Tu Carrito de Compras ({totalQuantity} unidades)</h1>
+            
+            <button onClick={clearCart} className="btn-clear-cart">
+                Vaciar Carrito
+            </button>
+            
             <div className="cart-items-list">
                 {cart.map(item => (
-                    // Mapeamos y renderizamos cada item usando el subcomponente CartItem
-                    <CartItem key={item.id} item={item} />
+                    <CartItem 
+                        key={item.id} 
+                        id={item.id}
+                        name={item.name} 
+                        price={item.price} 
+                        quantity={item.quantity} 
+                    />
                 ))}
             </div>
 
             <div className="cart-summary">
-                <p className="cart-total-price">Total Final: <strong>${totalPrice.toFixed(2)}</strong></p>
+                <h3>Total a Pagar: <strong>${totalPrice.toFixed(2)}</strong></h3>
                 
-                <div className="cart-actions">
-                    <button onClick={clearCart} className="btn-clear-cart">
-                        Vaciar Carrito
-                    </button>
-                    
-                    {/* Botón para navegar al proceso de pago */}
-                    <Link to="/checkout" className="btn-checkout">
-                        Proceder al Pago
-                    </Link>
-                </div>
+                <Link to="/checkout" className="btn-finalize-purchase">
+                    Proceder al Checkout
+                </Link>
             </div>
         </div>
     );

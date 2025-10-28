@@ -1,45 +1,51 @@
-import React, {createContext, useState, useContext, useMemo} from "react";
+import React, { createContext, useState, useContext, useMemo } from 'react';
 
 const CartContext = createContext();
 
 export const useCart = () => useContext(CartContext);
 
-export const CartProvider = ({children}) => {
+export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
 
     const isInCart = (id) => {
-        return cart.some(item => item.id === id)
-    }
+        return cart.some(item => item.id === id);
+    };
 
-    const addItem = (item, quantity) =>{
-        if (isInCart(item.id)){
-            setCart (prevCart =>
+    const addItem = (item, quantity) => {
+        if (isInCart(item.id)) {
+            setCart(prevCart =>
                 prevCart.map(prod =>
                     prod.id === item.id ? { ...prod, quantity: prod.quantity + quantity } : prod
                 )
             );
         } else {
-            setCart (prevCart => [...prevCart, {...item, quantity}]);}
+            setCart(prevCart => [...prevCart, { ...item, quantity }]);
+        }
     };
 
     const removeItem = (id) => {
-        setCart (prevCart => prevCart.filter(item => item.id !== id));
+        setCart(prevCart => prevCart.filter(item => item.id !== id));
     };
 
     const clearCart = () => {
         setCart([]);
     };
 
+    // Cálculos Derivados
     const totalItems = useMemo(() => cart.length, [cart]);
 
     const totalQuantity = useMemo(() => {
-        return cart.reduce ((acc, item) => acc + item.quantity, 0);
+        return cart.reduce((acc, item) => acc + item.quantity, 0);
     }, [cart]);
-    
 
+    // 🛑 CRÍTICO: Cálculo robusto del precio total para evitar NaN
     const totalPrice = useMemo(() => {
-        return cart.reduce ((acc, item) => acc + item.quantity * item.precio, 0);
+        return cart.reduce((acc, item) => {
+            const priceValue = Number(item.price) || 0; 
+            return acc + priceValue * item.quantity;
+        }, 0);
     }, [cart]);
+
 
     const contextValue = {
         cart,
@@ -49,7 +55,7 @@ export const CartProvider = ({children}) => {
         isInCart,
         totalItems,
         totalQuantity,
-        totalPrice
+        totalPrice,
     };
 
     return (
@@ -57,8 +63,7 @@ export const CartProvider = ({children}) => {
             {children}
         </CartContext.Provider>
     );
-
-}
+};
 
 
 
