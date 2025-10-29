@@ -1,0 +1,41 @@
+.btn-input{
+    padding: 10px;
+    background-color: #fff;
+    color: #000;
+    border: none;
+    text-align: center;
+    text-decoration: none ;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 10px;
+    transition: background-color 0.3s ease;
+    margin: 5px;
+}
+
+.imput{
+    padding: 10px;
+    background-color: #fff;
+    color: #000;
+    border: none;
+    text-align: center;
+    text-decoration: none ;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 30px;
+    transition: background-color 0.3s ease;
+    margin: 5px;
+}
+
+.btn-add-to-cart{
+    margin-top: 30px;
+    padding: 10px;
+    background-color: #fff;
+    color: #000;
+    border: none;
+    text-align: center;
+    text-decoration: none ;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}

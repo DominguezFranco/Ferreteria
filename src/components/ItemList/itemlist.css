@@ -1,0 +1,18 @@
+/* ItemList.css */
+
+.item-list {
+  /* Habilitar Flexbox */
+  display: flex;
+
+  /* Centrar los elementos (las cards) horizontalmente */
+  justify-content: center;
+
+  /* Permitir que las cards salten a la siguiente línea si es necesario */
+  flex-wrap: wrap;
+
+  /* Añadir espacio entre las cards */
+  gap: 30px; 
+
+  /* Opcional: Centrar el bloque ItemList dentro del ItemListContainer */
+  width: 100%;
+}

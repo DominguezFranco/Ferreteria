@@ -31,14 +31,14 @@ export const CartProvider = ({ children }) => {
         setCart([]);
     };
 
-    // Cálculos Derivados
+    
     const totalItems = useMemo(() => cart.length, [cart]);
 
     const totalQuantity = useMemo(() => {
         return cart.reduce((acc, item) => acc + item.quantity, 0);
     }, [cart]);
 
-    // 🛑 CRÍTICO: Cálculo robusto del precio total para evitar NaN
+    
     const totalPrice = useMemo(() => {
         return cart.reduce((acc, item) => {
             const priceValue = Number(item.price) || 0; 

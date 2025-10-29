@@ -1,11 +1,12 @@
 import React from 'react';
 import { useCart } from '../../context/CartContext';
+import './cartitem.css';
 
-// Espera 'name' y 'price' (mapeados desde ItemDetailContainer)
+
 const CartItem = ({ id, name, price, quantity }) => {
     const { removeItem } = useCart();
     
-    // 🛑 CRÍTICO: Aseguramos que 'price' es un número válido (o 0).
+    
     const numericPrice = Number(price) || 0; 
     
     const subtotal = numericPrice * quantity;

@@ -1,0 +1,41 @@
+.product-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: solid 1px #ccc;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+.product-image{
+    height: 150px;
+    width: 150px;
+}
+
+
+.card-body {
+    padding: 10px; 
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-between;
+    flex-grow: 1; 
+}
+
+
+.product-stock {
+    margin-bottom: 15px; 
+    margin-top: 5px; 
+}
+
+
+.btn-detail {
+    margin-top: auto;  
+    text-align: center; 
+    display: block; 
+    text-decoration: none; 
+    padding: 10px; 
+    background-color: #333; 
+    color: #fff; 
+    border-radius: 5px; 
+    cursor: pointer;
+}

@@ -1,7 +1,12 @@
-.container{
+.item-list-container{
     display: flex; 
     justify-content: center; 
-    align-items: flex-start;
-    gap: 10px;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 20px;
+    padding: 20px;
+    width: 100%;
 }
+
+
 

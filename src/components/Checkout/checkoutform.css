@@ -1,0 +1,63 @@
+/* CheckoutForm.css */
+
+/* Estilos para el contenedor de cada campo (el <div> que envuelve <label> e <input>) */
+.checkout-form > div {
+  /* Habilitar Flexbox */
+  display: flex;
+  
+  /* Colocar la etiqueta y el input en una columna (uno debajo del otro) */
+  flex-direction: column;
+  
+  /* Centrar horizontalmente la etiqueta y el input dentro de este div */
+  align-items: center; 
+  
+  /* Espacio entre cada campo (Nombre, Teléfono, Email) */
+  margin-bottom: 25px; 
+  
+  /* Asegura que cada campo ocupe el ancho necesario para el centrado */
+  width: 100%;
+}
+
+/* Estilos para las etiquetas */
+.checkout-form label {
+    font-weight: bold;
+    margin-bottom: 5px; /* Espacio entre la etiqueta y el input */
+}
+
+/* Estilos para los campos de entrada (inputs) */
+.checkout-form input {
+    padding: 10px;
+    width: 300px; /* Define un ancho fijo para que se vean uniformes */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center; /* Centra el texto escrito en el input */
+}
+
+/* Estilos para el contenedor principal del formulario (el <form> mismo) */
+.checkout-form {
+    /* Centrar el formulario completo en el medio de la vista */
+    display: flex;
+    flex-direction: column; /* Apila los campos y el botón */
+    align-items: center; /* Centra los campos y el botón */
+    
+    /* Opcional: Estilo visual para el contenedor */
+    max-width: 500px; /* Limita el ancho del formulario */
+    margin: 40px auto; /* Centra el formulario en la página y da espacio superior */
+    padding: 30px;
+    background-color: #ffffff; /* Fondo blanco */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-confirm{
+    margin-top: 30px;
+    padding: 10px 20px;
+    background-color: #3A4B5D;
+    color: #000;
+    border: none;
+    text-align: center;
+    text-decoration: none ;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}

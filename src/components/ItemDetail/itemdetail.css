@@ -1,0 +1,56 @@
+.item-detail-view {
+  /* Habilitar Flexbox */
+  display: flex; 
+
+  /* Espacio entre los dos bloques (imagen e info) */
+  gap: 30px; 
+  
+  /* Asegurar que el contenido no esté pegado a los bordes */
+  padding: 40px; 
+  
+  /* Opcional: Centrar el bloque completo en la página y darle un ancho máximo */
+  max-width: 1200px;
+  margin: 50px auto;
+  align-items: flex-start; /* Alinea la imagen y la info desde arriba */
+  background-color: #fff; /* Fondo blanco si el body es oscuro */
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 2. Estilo para el contenedor de la imagen */
+.detail-image-container {
+  /* Restringe el ancho máximo de la imagen */
+  max-width: 400px; 
+  flex-shrink: 0; /* Evita que este contenedor se encoja más de lo necesario */
+}
+
+.detail-info-container {
+  display: flex;
+  flex-direction: column; /* Apila el contenido de info verticalmente */
+  flex-grow: 1;
+  margin: 90px 30px;
+  padding: 30px;
+  font-size: 20px;
+  border-radius: 10px;
+  background-color: #3A4B5D; /* Permite que este bloque ocupe todo el espacio restante a la derecha */
+}
+
+.detail-image { 
+  width: 100%;
+  height: auto;
+  display: block; /* Para manejar mejor el espacio */
+}
+
+.btn-finish-buy{
+  margin-top: 30px;
+  padding: 10px 20px;
+  background-color: #fff;
+  color: #000;
+  border: none;
+  text-align: center;
+  text-decoration: none ;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}

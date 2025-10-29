@@ -29,14 +29,14 @@ const ItemDetailContainer = () => {
             
     }, [productId]);
 
-    // Función que se pasa al ItemCount. Aquí ocurre el mapeo crítico.
+    
     const handleOnAdd = (quantity) => {
         
-        // 🛑 Mapeamos los campos de Firestore a los nombres esperados por el CartContext.
+        
         const itemToAdd = {
             id: product.id,
-            name: product.nombre,   // Mapeo de nombre
-            price: product.precio, // Mapeo de precio
+            name: product.nombre,   
+            price: product.precio, 
             stock: product.stock,
             imagen: product.imagen
         };

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../../context/CartContext'; 
-import CartItem from './CartItem'; // Importa el componente de item
+import CartItem from './CartItem';
+import './cart.css';
 
 const Cart = () => {
     const { cart, clearCart, totalPrice, totalQuantity } = useCart();
@@ -22,10 +23,6 @@ const Cart = () => {
         <div className="cart-container">
             <h1>Tu Carrito de Compras ({totalQuantity} unidades)</h1>
             
-            <button onClick={clearCart} className="btn-clear-cart">
-                Vaciar Carrito
-            </button>
-            
             <div className="cart-items-list">
                 {cart.map(item => (
                     <CartItem 
@@ -40,7 +37,9 @@ const Cart = () => {
 
             <div className="cart-summary">
                 <h3>Total a Pagar: <strong>${totalPrice.toFixed(2)}</strong></h3>
-                
+                <button onClick={clearCart} className="btn-clear-cart">
+                Vaciar Carrito
+                </button>
                 <Link to="/checkout" className="btn-finalize-purchase">
                     Proceder al Checkout
                 </Link>
