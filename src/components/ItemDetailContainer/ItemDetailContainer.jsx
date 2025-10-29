@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ItemDetail from '../ItemDetail/ItemDetail';
 import { getProductById } from '../../db/firestore';
-import { useCart } from '../../context/CartContext';
+import { useCart } from '../../Context/CartContext';
 
 const ItemDetailContainer = () => {
     const [product, setProduct] = useState(null);

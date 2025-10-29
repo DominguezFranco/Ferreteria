@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useCart } from '../../context/CartContext';
+import { useCart } from '../../Context/CartContext';
 import { createOrder } from '../../db/firestore';
 import CheckoutForm from './CheckoutForm';
 import './checkout.css';
