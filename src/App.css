@@ -3,3 +3,11 @@
 body{
   background-color: #4F6D8A;
 }
+
+body, html, #root {
+    /* Asegura que no haya scrollbars indeseados por overflows */
+    overflow-x: hidden; 
+    
+    /* Opcional: Asegura que el contenedor raíz ocupe el 100% */
+    width: 100%;
+}

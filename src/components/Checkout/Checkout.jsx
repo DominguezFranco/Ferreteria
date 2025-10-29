@@ -77,7 +77,7 @@ const Checkout = () => {
 
     return (
         <div className="checkout-container">
-            <h2>Finalizar Compra</h2>
+            <h2 >Finalizar Compra</h2>
             {error && <p className="error-message">Error: {error}</p>}
             <CheckoutForm onConfirm={handleConfirmOrder} />
         </div>
